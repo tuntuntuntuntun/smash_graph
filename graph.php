@@ -48,7 +48,7 @@ try {
 </head>
 <body>
     <!-- 取得した情報をindex.phpに渡す -->
-    <form action="index.php" method="post">
+    <form action="index.php" method="post" name="form">
         <input type="hidden" name="fighter" value="<?= $fighter; ?>">
 
         <?php foreach ($power as $p_val): ?>
@@ -58,8 +58,11 @@ try {
         <?php foreach ($created_at as $c_val): ?>
         <input type="hidden" name="created_at[]" value="<?= $c_val; ?>">
         <?php endforeach; ?>
-        
-        <input type="submit">
     </form>
+
+    <script>
+        // submitする
+        document.form.submit();
+    </script>
 </body>
 </html>
