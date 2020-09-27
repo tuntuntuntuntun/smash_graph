@@ -12,6 +12,7 @@ $power = $_POST['power'];
 try {
     $pdo = new PDO(DSN, DB_USER, DB_PASS);
 
+    // fighter_powerテーブルにレコードを挿入
     $sql = "INSERT INTO fighter_power(user_id, fighter, power, created_at) VALUES (:user_id, :fighter, :power, :created_at)";
     $stmt = $pdo->prepare($sql);
 
