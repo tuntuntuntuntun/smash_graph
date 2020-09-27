@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // ログインしていたらmainFormへ遷移
 if (isset($_SESSION['id'])) {
     header('Location: ../mainForm.php');
