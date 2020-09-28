@@ -2,7 +2,8 @@
 
 require 'auth/isAuth.php';
 
-// isAuth();
+session_start();
+isAuth();
 
 $fighter = json_encode($_POST['fighter']);
 $power = json_encode($_POST['power']);
@@ -24,9 +25,19 @@ $created_at = json_encode($_POST['created_at']);
     <div>
         <a href="./mainForm.php">データの入力はこちら</a>
     </div>
+    <form action="./delete.php" method="post" name="myForm">
+        <input type="hidden" name="fighter" value="<?= $_POST['fighter']; ?>">
+    </form>
+    <div>
+        <a href="./delete.php">データの削除はこちら</a>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script>
+        // フォームを送信
+        myForm.submit();
+
+        // グラフを描画
         let $fighter = JSON.parse('<?= $fighter; ?>')
         let $created_at = JSON.parse('<?= $created_at; ?>')
         let $power = JSON.parse('<?= $power; ?>')
@@ -46,7 +57,7 @@ $created_at = json_encode($_POST['created_at']);
                     label: $fighter,
                     backgroundColor: 'orange',
                     borderColor: 'blue',
-                    // fighterカラム
+                    // powerカラム
                     data: $power
                 }]
             },
