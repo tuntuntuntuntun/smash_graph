@@ -21,22 +21,18 @@ $created_at = json_encode($_POST['created_at']);
 <body>
     <!-- グラフを表示 -->
     <canvas id="myChart"></canvas>
-
     <div>
-        <a href="./mainForm.php">データの入力はこちら</a>
+        <button onclick="location.href='./mainForm.php'">データの入力はこちら</button>
     </div>
-    <form action="./delete.php" method="post" name="myForm">
+    <form action="./delete.php" method="post" id="deleteForm">
         <input type="hidden" name="fighter" value="<?= $_POST['fighter']; ?>">
     </form>
     <div>
-        <a href="./delete.php">データの削除はこちら</a>
+        <button id="delete">データの削除はこちら</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script>
-        // フォームを送信
-        myForm.submit();
-
         // グラフを描画
         let $fighter = JSON.parse('<?= $fighter; ?>')
         let $created_at = JSON.parse('<?= $created_at; ?>')
@@ -58,7 +54,8 @@ $created_at = json_encode($_POST['created_at']);
                     backgroundColor: 'orange',
                     borderColor: 'blue',
                     // powerカラム
-                    data: $power
+                    data: $power,
+                    lineTension: 0,
                 }]
             },
             options: {
@@ -70,6 +67,11 @@ $created_at = json_encode($_POST['created_at']);
                     }]
                 }
             }
+        });
+
+        // フォームを送信
+        document.getElementById('delete').addEventListener('click', function() {
+            document.getElementById('deleteForm').submit();
         });
     </script>
 </body>

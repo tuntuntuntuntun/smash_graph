@@ -1,8 +1,11 @@
 <?php
 
 require './const.php';
+require 'auth/isAuth.php';
 
 session_start();
+
+isAuth();
 
 // 特定のファイターのcreated_atを過去５件分取得する
 $pdo = new PDO(DSN, DB_USER, DB_PASS);
@@ -17,8 +20,8 @@ foreach ($fighter_power as $fp) {
     array_push($created_at, $fp['created_at']);
 }
 
-if ($created_at.length) {
-    header('Location: ./mainForm.php');
+if (count($created_at)) {
+    // header('Location: ./mainForm.php');
 }
 
 ?>
