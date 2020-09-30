@@ -1,6 +1,15 @@
 <?php
 
 require '../const.php';
+require '../validation.php';
+
+// 不備があった場合入力画面へ
+if(validate_mail($_POST['mail'])) {
+    header('Location: ./signup.php');
+}
+if(validate_pass($_POST['password'])) {
+    header('Location: ./signup.php');
+}
 
 session_start();
 

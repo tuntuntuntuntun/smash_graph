@@ -3,6 +3,15 @@
 // 入力されたデータを挿入
 
 require 'const.php';
+require '../validation.php';
+
+// 不備があった場合入力画面へ
+if(validate_fighter($_POST['fighter'])) {
+    header('Location: ./mainForm.php');
+}
+if(validate_power($_POST['power'])) {
+    header('Location: ./mainForm.php');
+}
 
 session_start();
 
