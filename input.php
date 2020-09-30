@@ -3,7 +3,7 @@
 // 入力されたデータを挿入
 
 require 'const.php';
-require '../validation.php';
+require 'validation.php';
 
 // 不備があった場合入力画面へ
 if(validate_fighter($_POST['fighter'])) {
