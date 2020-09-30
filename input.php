@@ -5,18 +5,21 @@
 require 'const.php';
 require 'validation.php';
 
-// 不備があった場合入力画面へ
-if(validate_fighter($_POST['fighter'])) {
-    header('Location: ./mainForm.php');
-}
-if(validate_power($_POST['power'])) {
-    header('Location: ./mainForm.php');
-}
-
-session_start();
-
 $fighter = $_POST['fighter'];
 $power = $_POST['power'];
+
+// 不備があった場合入力画面へ
+if(validate_fighter($fighter)) {
+    header('Location: ./mainForm.php');
+    exit();
+}
+
+// if(validate_power($power)) {
+//     header('Location: ./mainForm.php');
+//     exit();
+// }
+
+session_start();
 
 try {
     $pdo = new PDO(DSN, DB_USER, DB_PASS);

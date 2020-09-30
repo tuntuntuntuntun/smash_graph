@@ -48,32 +48,48 @@ function validate_pass($val)
         $errors['blank'] = 'パスワードを入力してください。';
         $check++;
     }
+
+    if ($check) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // ファイター名のチェック
-$url = "./fighters.json";
-$json = file_get_contents($url);
-$json = mb_convert_encoding($json, 'UTF8', 'ASCII, JIS, UTF-8, EUC-JP, SJIS-WIN');
-
-// 配列にする
-$array = json_decode($json, true);
-
 function validate_fighter($val)
 {
+    $url = "./fighters.json";
+    $json = file_get_contents($url);
+    $json = mb_convert_encoding($json, 'UTF8', 'ASCII, JIS, UTF-8, EUC-JP, SJIS-WIN');
+    
+    // 配列にする
+    $array = json_decode($json, true);
+
     $check = 0;
+    $count = 0;
     for($i = 0; $i < count($array["fighters"]); $i++) {
-        if ($val === $array["fighters"][$i]) {
-            $check++;
+        if (strcmp($val, $array["fighters"][$i]) === 0) {
+            $count++;
+            break;
         }
     }
     // 一つも当てはまらなかった場合エラー
-    if (!($check)) {
+    if ($count === 0) {
         $errors['fighters'] = '正しいファイター名を入力してください。';
+        $check++;
     }
 
     // 空欄ではないかチェック
     if ($val === null) {
         $errors['blank'] = 'ファイターを入力してください。';
+        $check++;
+    }
+
+    if ($check) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -92,5 +108,11 @@ function validate_power($val)
     if ($val === null) {
         $errors['blank'] = '世界戦闘力を入力してください。';
         $check++;
+    }
+
+    if ($check) {
+        return true;
+    } else {
+        return false;
     }
 }
