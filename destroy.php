@@ -10,4 +10,4 @@ $sql = "DELETE FROM fighter_power WHERE created_at = :created_at AND user_id = :
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':created_at' => $_POST['created_at'] , ':user_id' => getAuthId()]);
 
-// header('Location: ./index.php');
+header('Location: ./graph.php');
